@@ -35,6 +35,7 @@ async function loadOwnerItems(name: string): Promise<{
     confidence: r.confidence,
     completed_at: r.completed_at,
     last_reminded_at: r.last_reminded_at,
+    notion_page_id: r.notion_page_id ?? null,
     created_at: r.created_at,
     meeting_title: r.meetings?.title ?? "Untitled meeting",
   }));
