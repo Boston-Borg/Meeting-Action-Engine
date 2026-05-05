@@ -10,7 +10,7 @@ export interface Meeting {
   title: string;
   source: MeetingSource;
   source_ref: string | null;
-  transcript: string;
+  transcript: string | null;          // never stored on the server; nullable for privacy
   occurred_at: string | null;
   processed_at: string | null;
   created_at: string;

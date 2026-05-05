@@ -52,6 +52,10 @@ export async function POST(req: NextRequest) {
     const extracted = await extractFromTranscript(transcript, title);
 
     // 2. Persist
+    // Privacy: we deliberately do NOT save the raw transcript to the database.
+    // Only the structured outputs (decisions, action items, open questions,
+    // and short verbatim source_quote excerpts) are persisted. Once the LLM
+    // has extracted what it needs, the transcript text is dropped.
     const sb = getServiceClient();
     const { data: meeting, error: mErr } = await sb
       .from("meetings")
@@ -59,7 +63,7 @@ export async function POST(req: NextRequest) {
         title: title || extracted.title || "Untitled meeting",
         source,
         source_ref,
-        transcript,
+        transcript: null,
         occurred_at,
         processed_at: new Date().toISOString(),
       })

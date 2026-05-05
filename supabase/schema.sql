@@ -13,7 +13,7 @@ create table if not exists public.meetings (
   title         text not null,
   source        text not null default 'upload',          -- upload | zoom | teams | email
   source_ref    text,                                    -- external id (zoom uuid, etc.)
-  transcript    text not null,                           -- raw cleaned transcript
+  transcript    text,                                    -- intentionally nullable: raw transcript is NEVER persisted (privacy)
   occurred_at   timestamptz,                             -- when the meeting happened
   processed_at  timestamptz,                             -- when LLM finished
   created_at    timestamptz not null default now()
